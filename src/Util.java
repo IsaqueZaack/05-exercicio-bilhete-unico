@@ -6,7 +6,7 @@ import static java.lang.Long.parseLong;
 import static java.lang.Double.parseDouble;
 
 public class Util {
-    private Bilhete[] bilhete = new Bilhete[2];
+    private Bilhete[] bilhete = new Bilhete[3];
     private int index = 0;
 
     public void menuPrincipal() {
@@ -53,7 +53,7 @@ public class Util {
                         listarBilhetes();
                         break;
                     case 3:
-                        remover();
+                        removerBilhete();
                 }
 
             }
@@ -148,12 +148,18 @@ public class Util {
         }
     }
 
-    private void remover() {
+    // método para remover um bilhete a partir de um cpf
+    private void removerBilhete() {
+        int resposta;
         int posicao = pesquisar();
-        for (int i = 0; i < index; i++) {
-                bilhete[posicao] = bilhete[bilhete.length];
+        if (posicao != -1) {
+            resposta = showConfirmDialog(null, "Tem certeza que deseja remover o bilhete?");
+            if (resposta == 0) {
+                index--;
+                bilhete[posicao] = bilhete[index];
+            }
         }
-        // algum erro de lógica
+
     }
 
     // método auxiliar para os outros métodos da aplicação
